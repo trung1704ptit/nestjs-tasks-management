@@ -24,34 +24,6 @@ export class TasksService {
     }
   }
 
-  //   getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
-  //     const { search, status } = filterDto;
-
-  //     // define a temporary array to handle the result
-  //     let tasks = this.getAllTasks();
-
-  //     // do something with status
-  //     if (status) {
-  //       tasks = tasks.filter((task) => task.status === status);
-  //     }
-
-  //     // do something with search
-  //     if (search) {
-  //       tasks = tasks.filter((task) => {
-  //         if (
-  //           task.title.toLowerCase().includes(search.toLowerCase()) ||
-  //           task.description.toLowerCase().includes(search.toLowerCase())
-  //         ) {
-  //           return true;
-  //         }
-  //         return false;
-  //       });
-  //     }
-
-  //     // return final result
-  //     return tasks;
-  //   }
-
   getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
     return this.tasksRepository.getAllTasks(filterDto);
   }
