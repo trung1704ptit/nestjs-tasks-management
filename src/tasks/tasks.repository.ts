@@ -14,15 +14,15 @@ export class TasksRepository extends Repository<Task> {
       title,
       description,
       status: TaskStatus.OPEN,
-      user
+      user,
     });
 
     await this.save(task);
     return task;
   }
 
-  async getTaskById(id: string): Promise<Task> {
-    const found = await this.findOne(id);
+  async getTaskById(id: string, user: User): Promise<Task> {
+    const found = await this.findOne({ id, user });
     if (!found) {
       throw new NotFoundException(`Task with id ${id} not found`);
     }
@@ -32,7 +32,7 @@ export class TasksRepository extends Repository<Task> {
 
   async getAllTasks(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
     const query = this.createQueryBuilder('task');
-    query.where({ user })
+    query.where({ user });
     const { status, search } = filterDto;
 
     if (status) {
